@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>{% block title%} {% endblock %}</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!--<link rel="stylesheet" type="text/css" href="css/layout.css">-->
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer{
+            margin-top: auto;
+            background-color: #F5B6E8;
+            font-color: black;
+            height: 4%;
+        }
+
+        nav{
+            background-color: #F5B6E8;   
+        }
+
+        #nav-list li a{
+            font-size: 1.8rem;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="content main-container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
