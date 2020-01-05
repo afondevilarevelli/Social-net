@@ -1,9 +1,51 @@
-<nav>
-    <div class="nav-wrapper">
-        <a href="/" class="brand-logo" id="logo-social-net"><i class="material-icons">thumbs_up_down</i>Social net</a>
-        <ul class="right hide-on-med-and-down" id="nav-list">
-            <li><a href="sass.html">Login</a></li>
-            <li><a href="badges.html">Sign up</a></li>
-        </ul>
-    </div>
+<nav class="navbar navbar-light bg-light" id="not-logged-navbar">
+    <a class="navbar-brand" href="/"><i data-feather="globe" style="padding-right: 4%;"></i>Social-net</a>
+    <ul class="navbar-nav">
+        <li class="nav-item p-2">
+            <a class="nav-link" href="/signup">Sign up</a>
+        </li>
+        <li class="nav-item active p-2">
+            <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
 </nav>
+
+<nav class="navbar navbar-light bg-light" id="logged-navbar">
+    <a class="navbar-brand" href="/"><i data-feather="globe" style="padding-right: 4%;"></i>Social-net</a>
+    <ul class="navbar-nav">
+        <li class="nav-item p-2">
+            <a class="nav-link" href="/home">Home</a>
+        </li>
+        <li class="nav-item active p-2">
+            <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    const user_cookie = getCookie('user_cookie')
+    if(user_cookie != ""){
+        document.getElementById('not-logged-navbar').style.display = "none"
+        document.getElementById('logged-navbar').style.visibility = "visible"
+    }
+    else{
+        document.getElementById('logged-navbar').style.visibility = "hidden"
+        document.getElementById('logged-navbar').style.display = "none"
+    }
+</script>

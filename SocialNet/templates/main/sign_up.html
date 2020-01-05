@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+
+{% block title%}
+Sign up
+{% endblock %}
+
+{% block content %}
+
+<div class="toast" style="position: absolute; right: 0; margin-right: 1%; margin-top: 1%; z-index: 1;"
+    data-delay="5000">
+    <div class="toast-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E0E431"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-alert-triangle rounded mr-2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <strong class="mr-auto">Error</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body bg-danger text-white">
+        Passwords must be the same...
+    </div>
+</div>
+
+<h3 style="text-align: center; margin-bottom: 1%;">Be part of our incredible community</h3>
+
+<form style="width: 50%; margin: auto; text-align: center;" method="POST" action="/signup" onsubmit="validate">
+    {% csrf_token %}
+    <div class="form-row mb-3">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" name="first_name" required>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" name="lastname" required>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+        </div>
+        <input type="email" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
+            name="mail" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Birthday</span>
+        </div>
+        <input type="date" max="3000-12-31" min="1000-01-01" class="form-control" name="birthday" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile02" name="image">
+            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"
+                style="text-align:left;">Choose image</label>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Username</span>
+        </div>
+        <input type="text" class="form-control" name="username" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Password</span>
+        </div>
+        <input type="password" class="form-control" name="password" required>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Password again</span>
+        </div>
+        <input type="password" class="form-control" name="password2" required>
+    </div>
+
+    <input type="submit" class="btn btn-primary m-auto" value="Sign up"></input>
+</form>
+
+
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop()
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName)
+    })
+
+    function validate(e) {
+        const form = document.forms[0]
+
+        if (form['password'].value != form['password2'].value) {
+            $('.toast').toast('show')
+            e.preventDefault()
+        }
+    }
+
+    document.forms[0].addEventListener("submit", validate, true);
+</script>
+{% endblock %}

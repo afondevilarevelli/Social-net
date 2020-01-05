@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block title%}
+Login
+{% endblock %}
+
+{% block content %}
+
+<style>
+    #login-logo {
+        width: 40%;
+        height: 50%;
+    }
+</style>
+
+<div class="toast" style="position: absolute; right: 0; margin-right: 1%; margin-top: 1%; z-index: 1;"
+    data-delay="4000">
+    <div class="toast-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E0E431"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-alert-triangle rounded mr-2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <strong class="mr-auto">Error</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body bg-danger text-white">
+        Username and password doesn't match...
+    </div>
+</div>
+
+<form style="width: 30%; margin: auto; text-align: center;" id="login-form">{% csrf_token %}
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvsqA9nOSxu9coConyJRW7J113EYl0EFBBAsWBqqu07ngGegDJ"
+        id="login-logo">
+    </img>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="login_username" aria-describedby="emailHelp" name="username"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="login_password" name="password">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary"></button>
+</form>
+
+<script>
+    $('#login-form').submit(function (e) {
+        e.preventDefault()
+
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: $('#login-form').serialize(),
+            success: function (res) {
+                window.location.href = '/home'
+            },
+            error: function (err) {
+                $('.toast').toast('show')
+            }
+        })
+    })
+</script>
+
+{% endblock %}
