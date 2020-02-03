@@ -1,13 +1,44 @@
 {% extends 'layout.html' %}
 
 {% block title%}
-    Home
+Home
 {% endblock %}
 
+{% block content %}
 <style>
+    #new-post {
+        width: 50%;
+        margin: auto;
+    }
     
+    #post-form{
+
+    }
+
+    #posts-list{
+        width: 50%;
+    }
+
+    .home-content{
+        text-align: center;
+    }
 </style>
 
-{% block content %}
-    HOME
+<div id="home-content">
+    <div id="new-post">
+        <form id="post-form" method="POST" action="/posts">{% csrf_token %}
+            <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write here..."></textarea>
+            </div>
+            <div class="input-group mb-3">
+                <input type="file" class="custom-file-input" id="inputGroupFile02" name="image">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary"></button>
+        </form>
+    </div>
+
+    <div id="posts_list">
+
+    </div>
+</div>
 {% endblock %}
