@@ -4,12 +4,11 @@ from django.http import Http404, HttpResponse, JsonResponse
 import hashlib
 import uuid
 
-
 def index(req):
     if req.COOKIES.get('user_cookie'):
         return redirect('/home')
     else:
-        return render(req, 'main/index.html')
+        return render(req, 'login/index.html')
 
 
 def login(req):
@@ -28,7 +27,7 @@ def login(req):
         res.status_code = 400
         return res
     else:
-        return render(req, 'main/login.html')
+        return render(req, 'login/login.html')
 
 
 def logout(req):
@@ -59,7 +58,7 @@ def sign_up(req):
         except:
             raise Http404("User already exists")
     else:
-        return render(req, 'main/sign_up.html')
+        return render(req, 'login/sign_up.html')
 
 
 def __hash_password(password):

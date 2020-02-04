@@ -6,12 +6,12 @@ def index(req):
         modelView = {
             "posts": Post.objects.filter(owner=req.COOKIES.get('user_cookie')).order_by('date')
         }
-        return render(req, 'home/index.html', context=modelView)
+        return render(req, 'main_menu/index.html', context=modelView)
     else:
         return redirect('/')
 
 def profile(req):
     if req.COOKIES.get('user_cookie'):
-        return render(req, 'home/profile.html')
+        return render(req, 'main_menu/profile.html')
     else:
         return redirect('/')

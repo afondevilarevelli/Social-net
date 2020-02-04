@@ -2,18 +2,19 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from SocialNet.views import main, home
+from login import views as login
+from main_menu import views as main_menu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', main.index),
-    path('login', main.login),
-    path('signup', main.sign_up),
-    path('logout', main.logout),
+    path('', login.index),
+    path('login', login.login),
+    path('signup', login.sign_up),
+    path('logout', login.logout),
 
-    path('home', home.index),
-    path('profile', home.profile)
+    path('home', main_menu.index),
+    path('profile', main_menu.profile)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
